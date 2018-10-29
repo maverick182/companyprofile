@@ -14,12 +14,12 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 
-<script type="text/javascript">
+<!-- <script type="text/javascript">
   function detail_inbox(id){
    save_method = 'update';
       $('#form')[0].reset();
    $.ajax({
-        url : "<?php echo base_url('control/data_ajax')?>/" + id,
+        url : "<?php ?>/" + id,
         type: "GET",
         dataType: "JSON",
         success: function(data)
@@ -31,7 +31,6 @@
           $('[name="notelp"]').val(data.notelp);
           $('[name="pesan"]').val(data.pesan);
 
-
           $('#modal_form').modal('show'); // show bootstrap modal when complete loaded
           $('.modal-title').text('Detail Inbox'); // Set title to Bootstrap modal title
         },
@@ -41,7 +40,7 @@
         }
     });
     }
-</script>
+</script> -->
 <body>
 
   <!-- Navbar -->
@@ -98,7 +97,7 @@
           <td><?php echo $no++ ?></td>
           <td><?php echo $f->nama ?></td>
           <td><?php echo $f->email ?></td>
-          <td><?php echo $f->notelp ?></td>
+          <td>asd</td>
           <td><?php 
             $msg = $f->pesan;
             $char = strlen($msg);
@@ -119,7 +118,7 @@
             <a class="btn-small red" href="<?php echo base_url("control/hapus_inbox/$f->id"); ?>" type="submit" name="btnhapus" onclick="return confirm('Anda yakin menghapus data ini')">
               <i class="material-icons">delete</i>
             </a>
-            <a class="btn-small green modal-trigger" href="#modal1"><i class="material-icons">zoom_in</i></a>
+            <a class="btn-small green modal-trigger" href="<?php echo "#modal"."$f->id"; ?>" <i class="material-icons">zoom_in</i></a>
             <!--<a href="'control/hapus_inbox'.<?php $f->id ?>" class="btn-small red" type="button" name="btnHapusFormulir"><i class="material-icons">delete</i></a>
             <a href="control/lihat_inbox" class="btn-small green" type="button" name="btnHapusFormulir"><i class="material-icons">zoom_in</i>-->
           </td>
@@ -131,31 +130,20 @@
 
   <!-- test -->
   <!-- Modal Structure -->
-  <div id="modal1" class="modal">
+  <?php foreach($formulir as $f) {?>
+  <div id="<?php echo "modal"."$f->id"; ?>" class="modal">
     <div class="modal-content">
-      <h4>Modal Header</h4>
-      <p>A bunch of text</p>
+      <h4><?php echo "$f->nama ($f->email)"; ?></h4>
+      <p><?php echo $f->pesan; ?></p>
     </div>
     <div class="modal-footer">
       <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
     </div>
   </div>
+  <?php } ?>
   <!--  -->
 
 </div>
-<div class="modal fade" id="modal_form" role="dialog">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h3 class="modal-title">Edit SPD</h3>
-        </div>
-        <div class="modal-body form">
-        </div>
-      </div>
-    </div>
-
-
 
 </body>
 </html>  

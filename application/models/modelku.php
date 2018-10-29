@@ -21,7 +21,6 @@ class Modelku extends CI_Model{
 		return $this->db->get('formulir');
 	}
 
-
 	function hapus_data($where,$table){
 		$this->db->where($where);
 		$this->db->delete($table);
